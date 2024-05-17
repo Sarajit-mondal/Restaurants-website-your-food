@@ -9,7 +9,7 @@ function MainLayout() {
         <Navbar></Navbar>
       </header>
       {/* main  */}
-      <main className="px-20">
+      <main>
         <Outlet></Outlet>
       </main>
       {/* footer */}

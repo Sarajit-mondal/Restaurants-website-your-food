@@ -38,8 +38,8 @@ function Navbar() {
     </div>
   );
   return (
-    <div className="max-w-6xl mx-auto w-11/12">
-      <div className="navbar p-5 bg-opacity-color text-white ">
+    <div className="fixed z-10 w-full">
+      <div className="navbar p-5 bg-opacity-color text-white max-w-6xl mx-auto w-11/12">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

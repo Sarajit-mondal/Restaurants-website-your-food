@@ -9,6 +9,7 @@ export default {
       dark: "#151515",
       "opacity-color": "#15151599",
       "light-gray": "#D9D9D9",
+      "yellow-color": "D99904",
     },
     extend: {},
   },
