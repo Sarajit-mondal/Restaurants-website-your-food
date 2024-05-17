@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  main,
+  Footer {
+    @apply max-w-6xl mx-auto w-11/12;
+  }
+}
+
+ul a.active {
+  color: gold;
+}
