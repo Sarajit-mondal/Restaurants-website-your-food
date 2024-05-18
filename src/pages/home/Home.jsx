@@ -6,10 +6,14 @@ import OrderOnline from "../../components/shareComponents/home/section/OrderOnli
 import OurMenu from "../../components/shareComponents/home/section/OurMenu";
 import TextiMonials from "../../components/shareComponents/home/section/TextiMonials";
 import YourFoodCard from "../../components/shareComponents/home/section/YourFoodCard";
+import { Helmet } from "react-helmet";
 
 function Home() {
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <BannerSlider></BannerSlider>
       <OrderOnline></OrderOnline>
       <YourFoodCard></YourFoodCard>
