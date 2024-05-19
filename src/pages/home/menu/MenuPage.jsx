@@ -16,6 +16,14 @@ function MenuPage() {
   // desserts
   const desserts =
     allMenu && allMenu.filter((offer) => offer.category === "dessert");
+  // pizza
+  const pizzas =
+    allMenu && allMenu.filter((offer) => offer.category === "pizza");
+  // salad
+  const salads =
+    allMenu && allMenu.filter((offer) => offer.category === "salad");
+  // soup
+  const soups = allMenu && allMenu.filter((offer) => offer.category === "soup");
 
   return (
     <div>
@@ -59,6 +67,57 @@ function MenuPage() {
         </div>
       </div>
       {/*  DessertsMenu */}
+      {/* Pizza    */}
+      <div>
+        <PageBanner
+          image={Desertsbanner}
+          heading="PIZZA"
+          subHeading="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        ></PageBanner>
+        {/* todayOffer OfferMenu */}
+        <div className="my-16">
+          <div className="grid grid-cols-2 gap-10">
+            {pizzas &&
+              pizzas.map((offer) => <Menu key={offer._id} menu={offer}></Menu>)}
+          </div>
+          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+        </div>
+      </div>
+      {/*  Pizza */}
+      {/* Salad    */}
+      <div>
+        <PageBanner
+          image={Desertsbanner}
+          heading="SALADS"
+          subHeading="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        ></PageBanner>
+        {/* todayOffer OfferMenu */}
+        <div className="my-16">
+          <div className="grid grid-cols-2 gap-10">
+            {salads &&
+              salads.map((offer) => <Menu key={offer._id} menu={offer}></Menu>)}
+          </div>
+          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+        </div>
+      </div>
+      {/*  Salad */}
+      {/* Soup    */}
+      <div>
+        <PageBanner
+          image={Desertsbanner}
+          heading="SOUPS"
+          subHeading="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        ></PageBanner>
+        {/* todayOffer OfferMenu */}
+        <div className="my-16">
+          <div className="grid grid-cols-2 gap-10">
+            {soups &&
+              soups.map((offer) => <Menu key={offer._id} menu={offer}></Menu>)}
+          </div>
+          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+        </div>
+      </div>
+      {/*  Soup */}
     </div>
   );
 }
