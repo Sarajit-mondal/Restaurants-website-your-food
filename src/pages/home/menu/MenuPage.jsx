@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import menuBanner from "../../../assets/menu/banner3.jpg";
 import Desertsbanner from "../../../assets/menu/Rectangle 9.png";
 
@@ -43,7 +44,10 @@ function MenuPage() {
                 <Menu key={offer._id} menu={offer}></Menu>
               ))}
           </div>
-          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          <Link to={`/ourshop`}>
+            {" "}
+            <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          </Link>
         </div>
       </div>
       {/* todayOffer OfferMenu */}
@@ -63,7 +67,10 @@ function MenuPage() {
                 <Menu key={offer._id} menu={offer}></Menu>
               ))}
           </div>
-          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          <Link to={`/ourshop`}>
+            {" "}
+            <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          </Link>
         </div>
       </div>
       {/*  DessertsMenu */}
@@ -80,7 +87,10 @@ function MenuPage() {
             {pizzas &&
               pizzas.map((offer) => <Menu key={offer._id} menu={offer}></Menu>)}
           </div>
-          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          <Link to={`/ourshop`}>
+            {" "}
+            <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          </Link>
         </div>
       </div>
       {/*  Pizza */}
@@ -97,7 +107,10 @@ function MenuPage() {
             {salads &&
               salads.map((offer) => <Menu key={offer._id} menu={offer}></Menu>)}
           </div>
-          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          <Link to={`/ourshop`}>
+            {" "}
+            <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          </Link>
         </div>
       </div>
       {/*  Salad */}
@@ -114,7 +127,9 @@ function MenuPage() {
             {soups &&
               soups.map((offer) => <Menu key={offer._id} menu={offer}></Menu>)}
           </div>
-          <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          <Link to={`/ourshop`}>
+            <MenuButton btnText="ORDER YOUR FAVOURITE FOOD"></MenuButton>
+          </Link>
         </div>
       </div>
       {/*  Soup */}

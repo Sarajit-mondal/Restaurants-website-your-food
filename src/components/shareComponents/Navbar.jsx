@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import notification from "../../assets/icon/cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png";
 import profileImg from "../../assets/profile.png";
@@ -76,8 +76,10 @@ function Navbar() {
         </div>
         <div className="navbar-end gap-3">
           <img src={notification} className="w-12" alt="" />
-          <a className="btn">Log In</a>
-          <a className="btn">Sign Out</a>
+          <Link to="/logIn">
+            <button className="btn">Log In</button>
+          </Link>
+          <button className="btn">Sign Out</button>
           <img src={profileImg} className="size-10" />
         </div>
       </div>
