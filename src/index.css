@@ -21,3 +21,7 @@ ul a.active {
     ),
     url("assets/home/featured.jpg");
 }
+
+.bg-authentication {
+  background-image: url(../src/assets/others/authentication.gif);
+}

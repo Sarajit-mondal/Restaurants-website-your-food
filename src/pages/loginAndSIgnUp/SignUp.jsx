@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "animate.css";
 
 import {
   FaFacebook,
@@ -13,8 +12,6 @@ import {
   FaGithub,
 } from "react-icons/fa6";
 import { useState } from "react";
-import { useContext } from "react";
-import { userContext } from "../../utils/AuthProvider";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -78,9 +75,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className="lg:m-20 mt-10">
+    <div className="lg:m-20 mt-10 p-10">
       <div className="grid grid-cols-1 md:grid-cols-2 justify-between w-full text-center items-center border-2 border-sky-100  mx-auto rounded-2xl  shadow-xl overflow-hidden">
-        <div className="animate__animated animate__bounceInUp bg-sky-200 h-full flex flex-col space-y-5 items-center justify-center p-10 text-white text-light">
+        <div className="animate__animated animate__bounceInUp bg-sky-200 h-full flex flex-col space-y-5 items-center justify-center p-10 text-white text-light bg-authentication bg-center ">
           <h2 className="text-3xl text-grayLight font-extrabold">
             {" "}
             Welcome Back!
@@ -90,7 +87,7 @@ export default function SignUp() {
             please stay connected with us please login with your info
           </p>
           <Link
-            to="/Login"
+            to="/logIn"
             className="py-3 px-10 bg-transparent border-2 border-white rounded-full font-semibold "
           >
             LOG IN
