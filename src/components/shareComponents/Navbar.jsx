@@ -1,8 +1,24 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import notification from "../../assets/icon/cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png";
 import profileImg from "../../assets/profile.png";
+import { useContext } from "react";
+import { userContext } from "../../provider/AuthProvider";
+import { toast } from "react-toastify";
 function Navbar() {
+  const { user, LogOutUser } = useContext(userContext);
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      await LogOutUser();
+      toast.success("LogOut successfull");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const navPages = (
     <>
       <li>
@@ -76,10 +92,16 @@ function Navbar() {
         </div>
         <div className="navbar-end gap-3">
           <img src={notification} className="w-12" alt="" />
-          <Link to="/logIn">
-            <button className="btn">Log In</button>
-          </Link>
-          <button className="btn">Sign Out</button>
+          {user ? (
+            <button className="btn" onClick={handleSignOut}>
+              Sign Out
+            </button>
+          ) : (
+            <Link to="/logIn">
+              <button className="btn">Log In</button>
+            </Link>
+          )}
+
           <img src={profileImg} className="size-10" />
         </div>
       </div>

@@ -11,11 +11,14 @@ import {
   FaGoogle,
   FaGithub,
 } from "react-icons/fa6";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { userContext } from "../../provider/AuthProvider";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-  // const {creactAccount, LogInWithSocial,updateUserProfile} = useContext(userContext)
+  const { creactAccount, LogInWithSocial, updateUserProfile } =
+    useContext(userContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -23,55 +26,59 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
-
   const onSubmit = (data) => {
-    // console.log(data);
-    // creactAccount(data.email, data.password)
-    // .then(userCadintion =>{
-    //   swal("Sign UP! Successfull", "You click the button! go your page", "success");
-    //   // set userName and photoUrl
-    //   updateUserProfile(data.name,data.photoURl)
-    //   navigate('/')
-    //  console.log(user)
-    // })
-    // .catch((error) => {
-    //   toast.error(error.code, {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    //     });
-    //   console.log(error.code)
-    // }
-    // );
+    console.log(data);
+    creactAccount(data.email, data.password)
+      .then((userCadintion) => {
+        swal(
+          "Sign UP! Successfull",
+          "You click the button! go your page",
+          "success"
+        );
+        // set userName and photoUrl
+        updateUserProfile(data.name, data.photoURl);
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.code, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        console.log(error.code);
+      });
   };
 
   ////Social login
   const socialLogin = (social) => {
-    // LogInWithSocial(social)
-    // .then(result =>{
-    //   console.log(result.user)
-    //   swal(social+" LogIn Successfull", "You clicked the button! go your page", "success");
-    //   navigate("/")
-    // })
-    // .catch(error => {
-    //   toast.error(error.code, {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    //     });
-    //   console.log(error.code)
-    // })
+    LogInWithSocial(social)
+      .then((result) => {
+        console.log(result.user);
+        swal(
+          social + " LogIn Successfull",
+          "You clicked the button! go your page",
+          "success"
+        );
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.code, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        console.log(error.code);
+      });
   };
 
   return (

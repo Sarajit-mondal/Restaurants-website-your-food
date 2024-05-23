@@ -4,6 +4,12 @@ import swal from "sweetalert";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import authenticationImage from "../../assets/others/authentication.gif";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 import {
   FaFacebook,
@@ -12,73 +18,90 @@ import {
   FaGoogle,
   FaGithub,
 } from "react-icons/fa6";
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { userContext } from "../../provider/AuthProvider";
 
 export default function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
-  // const { LogInWithSocial, LogInWithEOrP } = useContext(userContext);
+  const { LogInWithSocial, LogInWithEOrP } = useContext(userContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const state = location.state;
-  // const [loading, setLoading] = useState(true);
-  const onSubmit = (data) => {
-    console.log(data);
-    // LogInWithEOrP(data.email, data.password)
-    //   .then((result) => {
-    //     console.log(result.user);
-    //     swal(
-    //       "LogIn Successfull",
-    //       "You click the button! go your page",
-    //       "success"
-    //     );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const form = location.state || "/";
+  const [loading, setLoading] = useState(true);
 
-    //     navigate(state ? state : "/");
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error.code, {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //   });
+  // captcha
+  const inputRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+  const handleValidate = () => {
+    const user = document.querySelector(".userCapture").value;
+    if (validateCaptcha(user) == true) {
+      toast.success("Captchar match");
+      setDisabled(false);
+    } else {
+      setDisabled(false);
+    }
+  };
+  /// signIn button condition disabled
+
+  const onSubmit = (data) => {
+    LogInWithEOrP(data.email, data.password)
+      .then((result) => {
+        swal(
+          "LogIn Successfull",
+          "You click the button! go your page",
+          "success"
+        );
+        navigate(form);
+      })
+      .catch((error) => {
+        toast.error(error.code, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   };
 
   ////Social login
   const socialLogin = (social) => {
-    // LogInWithSocial(social)
-    //   .then((result) => {
-    //     console.log(result.user);
-    //     swal(
-    //       social + " LogIn Successfull",
-    //       "You click the button! go your page",
-    //       "success"
-    //     );
-    //     navigate(state ? state : "/");
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error.code, {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //     console.log(error.code);
-    //   });
+    LogInWithSocial(social)
+      .then((result) => {
+        console.log(result.user);
+        swal(
+          social + " LogIn Successfull",
+          "You click the button! go your page",
+          "success"
+        );
+        navigate(form);
+      })
+      .catch((error) => {
+        toast.error(error.code, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        console.log(error.code);
+      });
   };
 
   return (
@@ -181,9 +204,26 @@ export default function LogIn() {
               </p>
             )}
 
+            {/* captcha */}
+            <div>
+              <LoadCanvasTemplate />
+            </div>
+            <input
+              className="userCapture"
+              ref={inputRef}
+              {...register("photoURl", {
+                required: true,
+              })}
+              placeholder="Type captcha here"
+            />
+            <p onClick={handleValidate}> valided</p>
             <button
-              className="cursor-pointer active:bg-sky-200 font-bold box-border  flex justify-center relative border-2 bg-transparent  border-sky-200 m-2 p-3 rounded-lg"
+              className={`cursor-pointer  
+              ${
+                disabled ? "bg-transparent" : "bg-gold-500"
+              } font-bold box-border  flex justify-center relative border-2 border-sky-200 m-2 p-3 rounded-lg`}
               type="submit"
+              disabled={disabled}
             >
               {" "}
               LogIn
