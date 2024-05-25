@@ -5,10 +5,11 @@ import profileImg from "../../assets/profile.png";
 import { useContext } from "react";
 import { userContext } from "../../provider/AuthProvider";
 import { toast } from "react-toastify";
+import { IoMdCart } from "react-icons/io";
 function Navbar() {
   const { user, LogOutUser } = useContext(userContext);
   const navigate = useNavigate();
-
+  console.log(user);
   const handleSignOut = async () => {
     try {
       await LogOutUser();
@@ -51,6 +52,12 @@ function Navbar() {
       <NavLink to="/ourmenu">Our Menu</NavLink>
 
       <NavLink to="/ourshop">Our Shop</NavLink>
+      <NavLink to="/ourshop">
+        <button className="btn">
+          <IoMdCart className="text-xl" />
+          <div className="badge badge-secondary">+1</div>
+        </button>
+      </NavLink>
     </div>
   );
   return (
@@ -102,7 +109,10 @@ function Navbar() {
             </Link>
           )}
 
-          <img src={profileImg} className="size-10" />
+          <img
+            src={user ? user.photoURL : profileImg}
+            className="size-10 rounded-full"
+          />
         </div>
       </div>
     </div>
