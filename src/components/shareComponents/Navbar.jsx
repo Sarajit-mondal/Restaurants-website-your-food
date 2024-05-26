@@ -1,15 +1,17 @@
+/* eslint-disable no-undef */
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import notification from "../../assets/icon/cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png";
 import profileImg from "../../assets/profile.png";
 import { useContext } from "react";
 import { userContext } from "../../provider/AuthProvider";
-import { toast } from "react-toastify";
 import { IoMdCart } from "react-icons/io";
+import useCart from "../../hooks/useCart";
 function Navbar() {
   const { user, LogOutUser } = useContext(userContext);
   const navigate = useNavigate();
-  console.log(user);
+  const { data: cart = [] } = useCart();
+  console.log(cart);
   const handleSignOut = async () => {
     try {
       await LogOutUser();
@@ -52,10 +54,10 @@ function Navbar() {
       <NavLink to="/ourmenu">Our Menu</NavLink>
 
       <NavLink to="/ourshop">Our Shop</NavLink>
-      <NavLink to="/ourshop">
+      <NavLink to="/dashboard">
         <button className="btn">
           <IoMdCart className="text-xl" />
-          <div className="badge badge-secondary">+1</div>
+          <div className="badge badge-secondary">+{cart.length}</div>
         </button>
       </NavLink>
     </div>

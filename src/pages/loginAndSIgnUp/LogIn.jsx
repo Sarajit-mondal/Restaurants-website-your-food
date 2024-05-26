@@ -35,7 +35,7 @@ export default function LogIn() {
   const location = useLocation();
   const form = location.state || "/";
   const [loading, setLoading] = useState(true);
-
+  console.log(location.state);
   // captcha
   const inputRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
